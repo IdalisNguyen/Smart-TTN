@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!----===== Iconscout CSS ===== -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="shortcut icon" href="picture/logo.png" type="image/x-icon">
+    <script src="slideshow.js" defer></script>
+
+    <title>TTN Smart</title>
+</head>
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class="">
+                <img src="picture/logo.png" alt="" width="40px">
+            </i>
+            <span class="text">TTN Smart</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="tab-item active">
+                <a href="#">
+                    <i class='bx bxs-dashboard'></i>
+                    <div>
+                        <span class="text">Danh mục chung</span>
+                    </div>
+                </a>
+            </li>
+            <li class="tab-item ">
+                <a href="#">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <div>
+                        <span class="text">Thành viên</span>
+                    </div>
+                </a>
+            </li>
+            
+            <li class="tab-item hide_user" id="hide_thong_ke">
+                <a href="#">
+                    <i class='bx bxs-message-dots' ></i>
+                    <div>
+                        <span class="text">Thống kê</span>
+                    </div>
+                </a>
+            </li>
+            
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li onclick="logOut()" id="logout">
+                <a href="#" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <i class="picture_login">
+                    <button onclick="openLoginForm()">
+                            <img src="picture/loginn.png" >
+                    </button>
+                </i>
+
+                <!-- The login form -->
+                <div id="loginForm" class="login-form">
+                    <form>
+                        <h2>Login</h2>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <p class="submit">
+                            <button type="submit">Login</button>
+                        </p>
+                    </form>
+                </div>
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main class="dashboard active">
+            <div class="dash-content">
+                <div class="overview">
+                    <div class="title">
+                        <i class="uil uil-tachometer-fast-alt"></i>
+                        <span class="text light_title">Danh Mục</span>
+                    </div>
+
+                    <div class="boxes">
+                        <div class="box box1">
+                            <i class="uil uil-thumbs-up"></i>
+                            <span class="text">Số lượng phản hồi</span>
+                            <span class="number" id="so_luong_phan_hoi">0</span>
+                        </div>
+                        <div class="box box2">
+                            <i class="uil uil-comments"></i>
+                            <span class="text">Đã tiếp nhận</span>
+                            <span class="number" id="da-tiep-nhan">0</span>
+                        </div>
+                        <div class="box box3">
+                            <i class="uil uil-share"></i>
+                            <span class="text">Đã xử lý</span>
+                            <span class="number" id="da-xu-ly">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="title">
+                    <i class="uil uil-comment-alt"></i>
+                    <span class="text light_title">Phản ánh hiện trường</span>
+                </div>
+
+                <div class="container">
+                    <div class="store-function">
+                        <div class="fuction">
+                            <div class="product">
+                                <label for="">ID</label>
+                                <input type="text" id="id_item" readonly>
+                            </div>
+                            <!-- <label for="">STT</label>
+                            <input type="text" id="so-thu-tu" readonly> -->
+                        </div>
+                        <div class="fuction">
+                            <div class="product">
+                                <label for="">Khu vực</label>
+                                <input type="text" id="khu-vuc" width="100px" >
+                            </div>
+                            <!-- <label for="">Khu vực</label>
+                            <input type="text" id="khu-vuc" width="100px"> -->
+                        </div>
+                        <div class="fuction">
+                            <div class="product">
+                                <label for="">Mức độ</label><br>
+                                <select name="trang-thai" id="muc-do" type="select" >
+                                    <option value="Trung bình">Trung bình</option>
+                                    <option value="Nguy cấp">Nguy cấp</option>
+                                    <option value="Cấp thiết">Cấp thiết</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="fuction">
+                            <div class="product">
+                                <label for="">Trạng Thái</label >
+                                <input type="text" id="trang-thai" >
+                            </div>
+                        </div>
+                        <div class="fuction">
+                            <div class="product">
+                                <label for="">Tình trạng</label >
+                                <input type="text" id="tinh-trang" readonly>
+                            </div>
+                            <div class="fuction">
+                                <button onclick="add()">Summit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pro-table">
+                    <h2>Danh sách phản ánh hiện trường</h2>
+                    <hr>
+                    <table class="table_recommend" id="render">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Khu vực</th>
+                                <th>Mức độ</th>
+                                <th>Trạng thái</th>
+                                <th>Tác vụ</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+                <div class="minishow" id="render2">
+
+                </div>
+
+            </div>
+        </main>
+        <!-- MAIN -->
+
+        <!-- MAIN Thanh vien -->
+        <main class="dashboard">
+            <div class="main-content-info container">
+                <div class="card">
+                    <h2 class="cus-num cus-h">05</h2>
+                    <p>Thành Viên</p>
+                </div>
+                <div class="cardd">
+                    <h2 class="cus-num cus-pro">250</h2>
+                    <p>Projects</p>
+                </div>
+                <!-- <div class="card">
+                    <h2 class="cus-num cus-ord">155</h2>
+                    <p>Order</p>
+                </div>
+                <div class="card">
+                    <h2 class="cus-num cus-inc">100k</h2>
+                    <p>Income</p>
+                </div> -->
+                <div class="clear"></div>
+            </div>
+            <div class="content-pro-par">
+                <div class="pro-tablee activee">
+                    <div class="recent-project">
+                        <div class="rec-pro-h">
+                            <h2>Thông Tin</h2>
+                        </div>
+                        <div class="see-all">
+                            <button>See all</button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="container_infor_member active">
+                        <div class="img_infor_box">
+                            <img class="img_infor" src="picture/gg.jpg" alt="">
+                        </div>
+                        <div class="title_infor_member">
+                            <h3>Nguyễn Thị Như</h3>
+                            <h5>21103079</h5>
+                            <h4>Ủy Viên Ban Chấp Hành Chi Hội Sinh Viên Khoa KHTN-CN</h4>
+                        </div>
+                        <div class="icon_infor_member">
+                            <a href="tel:9800121212"><i class="fa fa-phone"></i></a>
+                            <a href="tel:9800121212"><i class="fa fa-envelope"></i></a>
+                            <a href="tel:9800121212"><i class="fa fa-map-marker"></i></a>
+                        </div>
+                        <hr>
+                        <table>
+                            <tr>
+                                <th>Chức vụ: </th>
+                                <th>Giảng Viên</th>
+                            </tr>
+                            <tr>
+                                <th>Ngày sinh:</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>Mã Sv:</th>
+                                <th>21103079</th>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ:</th>
+                                <th>58 Lương Thế Vinh</th>
+                            </tr>
+                            <tr>
+                                <th>ĐT di động:</th>
+                                <th>0999999999</th>
+                            </tr>
+                            <tr>
+                                <th>Email liên lạc:</th>
+                                <th>21103079@sv.ttn.edu.vn</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- pro-table-->
+            <div class="pro-tablee ">
+                <div class="recent-project">
+                    <div class="rec-pro-h">
+                        <h2>Thông Tin</h2>
+                    </div>
+                    <div class="see-all">
+                        <button>See all</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="container_infor_member active">
+                    <div class="img_infor_box">
+                        <img class="img_infor" src="picture/gg.jpg" alt="">
+                    </div>
+                    <div class="title_infor_member">
+                        <h3>Nguyễn Hữu Phước</h3>
+                        <h5>21103079</h5>
+                        <h4>Ủy Viên Ban Chấp Hành Chi Hội Sinh Viên Khoa KHTN-CN</h4>
+                    </div>
+                    <div class="icon_infor_member">
+                        <a href="tel:9800121212"><i class="fa fa-phone"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-envelope"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-map-marker"></i></a>
+                    </div>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Chức vụ: </th>
+                            <th>Sinh viên</th>
+                        </tr>
+                        <tr>
+                            <th>Ngày sinh:</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>Mã Sv:</th>
+                            <th>21103079</th>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ:</th>
+                            <th>58 Lương Thế Vinh</th>
+                        </tr>
+                        <tr>
+                            <th>ĐT di động:</th>
+                            <th>0999999999</th>
+                        </tr>
+                        <tr>
+                            <th>Email liên lạc:</th>
+                            <th>21103079@sv.ttn.edu.vn</th>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- pro-table-->
+            <div class="pro-tablee">
+                <div class="recent-project">
+                    <div class="rec-pro-h">
+                        <h2>Thông Tin</h2>
+                    </div>
+                    <div class="see-all">
+                        <button>See all</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="container_infor_member active">
+                    <div class="img_infor_box">
+                        <img class="img_infor" src="picture/gg.jpg" alt="">
+                    </div>
+                    <div class="title_infor_member">
+                        <h3>Trịnh Thanh Tâm</h3>
+                        <h5>21103189</h5>
+                        <h4>Ủy Viên Ban Chấp Hành Chi Hội Sinh Viên Khoa KHTN-CN</h4>
+                    </div>
+                    <div class="icon_infor_member">
+                        <a href="tel:9800121212"><i class="fa fa-phone"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-envelope"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-map-marker"></i></a>
+                    </div>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Chức vụ: </th>
+                            <th>Sinh viên</th>
+                        </tr>
+                        <tr>
+                            <th>Ngày sinh:</th>
+                            <th>06/06/2003</th>
+                        </tr>
+                        <tr>
+                            <th>Mã Sv:</th>
+                            <th>21103189</th>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ:</th>
+                            <th>Hòa Thuận, BMT, ĐắkLắk</th>
+                        </tr>
+                        <tr>
+                            <th>ĐT di động:</th>
+                            <th>0775098465</th>
+                        </tr>
+                        <tr>
+                            <th>Email liên lạc:</th>
+                            <th>21103189@sv.ttn.edu.vn</th>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- pro-table-->
+            <div class="pro-tablee">
+                <div class="recent-project">
+                    <div class="rec-pro-h">
+                        <h2>Thông Tin</h2>
+                    </div>
+                    <div class="see-all">
+                        <button>See all</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="container_infor_member active">
+                    <div class="img_infor_box">
+                        <img class="img_infor" src="picture/gg.jpg" alt="">
+                    </div>
+                    <div class="title_infor_member">
+                        <h3>Nguyễn Văn A</h3>
+                        <h5>21103111</h5>
+                        <h4>Ủy Viên Ban Chấp Hành Chi Hội Sinh Viên Khoa KHTN-CN</h4>
+                    </div>
+                    <div class="icon_infor_member">
+                        <a href="tel:9800121212"><i class="fa fa-phone"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-envelope"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-map-marker"></i></a>
+                    </div>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Chức vụ: </th>
+                            <th>Sinh viên</th>
+                        </tr>
+                        <tr>
+                            <th>Ngày sinh:</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>Mã Sv:</th>
+                            <th>21103111</th>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ:</th>
+                            <th>58 Lương Thế Vinh</th>
+                        </tr>
+                        <tr>
+                            <th>ĐT di động:</th>
+                            <th>0999999999</th>
+                        </tr>
+                        <tr>
+                            <th>Email liên lạc:</th>
+                            <th>21103079@sv.ttn.edu.vn</th>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- pro-table-->
+            <div class="pro-tablee">
+                <div class="recent-project">
+                    <div class="rec-pro-h">
+                        <h2>Thông Tin</h2>
+                    </div>
+                    <div class="see-all">
+                        <button>See all</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="container_infor_member active">
+                    <div class="img_infor_box">
+                        <img class="img_infor" src="picture/gg.jpg" alt="">
+                    </div>
+                    <div class="title_infor_member">
+                        <h3>Nguyễn Thị B</h3>
+                        <h5>21103222</h5>
+                        <h4>Ủy Viên Ban Chấp Hành Chi Hội Sinh Viên Khoa KHTN-CN</h4>
+                    </div>
+                    <div class="icon_infor_member">
+                        <a href="tel:9800121212"><i class="fa fa-phone"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-envelope"></i></a>
+                        <a href="tel:9800121212"><i class="fa fa-map-marker"></i></a>
+                    </div>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Chức vụ: </th>
+                            <th>Sinh viên</th>
+                        </tr>
+                        <tr>
+                            <th>Ngày sinh:</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th>Mã Sv:</th>
+                            <th>21103222</th>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ:</th>
+                            <th>58 Lương Thế Vinh</th>
+                        </tr>
+                        <tr>
+                            <th>ĐT di động:</th>
+                            <th>0999999999</th>
+                        </tr>
+                        <tr>
+                            <th>Email liên lạc:</th>
+                            <th>21103079@sv.ttn.edu.vn</th>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- pro-table-->
+
+            </div>
+
+
+
+            <div class="pro-cus">
+                <div class="recent-project">
+                    <div class="rec-pro-h">
+                        <h2>All Customers</h2>
+                    </div>
+                    <div class="see-all">
+                        <button>See all</button>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            
+                <table style="width:100%">
+                    <tr>
+                        <th>Pic</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                    </tr>
+                    <tr class="tab_infor activee">
+                        
+                        <td><img class="table-img" src="picture/user.png" /></td>
+                        <td>Nguyễn Thị Như</td>
+                        <td class="cnt-info-td"><a href="tel:9800121212"><i class="fa fa-phone"></i></a><a
+                                href="tel:9800121212"><i class="fa fa-envelope"></i></a><a href="tel:9800121212"><i
+                                    class="fa fa-map-marker"></i></a></td>
+                        
+                    </tr>
+                    <tr class="tab_infor">
+                        <!-- <div class="tab_infor"> -->
+                        <td><img class="table-img" src="picture/user.png" /></td>
+                        <td>Nguyễn Hữu Phước</td>
+                        <td class="cnt-info-td"><a href="tel:9800121212"><i class="fa fa-phone"></i></a><a
+                                href="tel:9800121212"><i class="fa fa-envelope"></i></a><a href="tel:9800121212"><i
+                                    class="fa fa-map-marker"></i></a></td>
+                    </tr>
+                    <tr class="tab_infor">
+                        <!-- <div class="tab_infor"> -->
+                        <td><img class="table-img" src="picture/user.png" /></td>
+                        <td>Trịnh Thanh Tâm</td>
+                        <td class="cnt-info-td"><a href="tel:9800121212"><i class="fa fa-phone"></i></a><a
+                                href="tel:9800121212"><i class="fa fa-envelope"></i></a><a href="tel:9800121212"><i
+                                    class="fa fa-map-marker"></i></a></td>
+                    </tr>
+                    <tr class="tab_infor">
+                        <!-- <div class="tab_infor"> -->
+                        <td><img class="table-img" src="picture/user.png" /></td>
+                        <td>Nguyễn Văn A</td>
+                        <td class="cnt-info-td"><a href="tel:9800121212"><i class="fa fa-phone"></i></a><a
+                                href="tel:9800121212"><i class="fa fa-envelope"></i></a><a href="tel:9800121212"><i
+                                    class="fa fa-map-marker"></i></a></td>
+                    </tr>
+                    <tr class="tab_infor">
+                        <!-- <div class="tab_infor"> -->
+                        <td><img class="table-img" src="picture/user.png" /></td>
+                        <td>Nguyễn Thị B</td>
+                        <td class="cnt-info-td"><a href="tel:9800121212"><i class="fa fa-phone"></i></a><a
+                                href="tel:9800121212"><i class="fa fa-envelope"></i></a><a href="tel:9800121212"><i
+                                    class="fa fa-map-marker"></i></a></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="clear"></div>
+            </div>
+        </main><!-- MAIN -->
+
+        <!-- MAIN Thong ke -->
+        <main class="dashboard">
+            <div id="statistical">
+
+            </div>
+
+        </main><!-- MAIN -->
+
+        <!-- MAIN Phân Quyền -->
+        <main class="dashboard ">
+            <div id="ttn">
+                <div class="slide_show" data-show>
+                    <button class="slide_show-button prev" data-slide_show-button><i class="uil uil-angle-left-b"></i></button>
+                    <button class="slide_show-button next" data-slide_show-button><i class="uil uil-angle-right-b"></i></button>
+                    <ul data-slides>
+                        <li class="slide" data-active>
+                            <img src="picture/back_header1.jpg" alt="">
+                        </li>
+                        <li class="slide">
+                            <img src="picture/back_header2.jpg" alt="">
+                        </li>
+                        <li class="slide">
+                            <img src="picture/back_header3.png" alt="">
+                        </li>
+                    </ul>
+    
+                </div><!--dong slide show-->
+                <nav>
+                    <ul>
+                        <!--menu cha-->
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">giới thiệu</a>
+                            <!--menu con cap 1-->
+                            <ul >
+                                <li><a href="#" title="Chính trị" >đơn vị</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a>
+                                            <ul>
+                                                <li><a href="">2</a></li>
+                                                <li><a href="">2</a></li>
+                                                <li><a href="">3</a></li>
+                                            </ul></li>
+                                        <li><a href="">3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#" title="Dân sinh">văn bản</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                                <li><a href="#" title="Lao động & việc làm">sinh viên</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                            </ul>
+                        </li>  
+                        <li><a href="#">đơn vị  </a>
+                            <ul >
+                                <li><a href="#" title="Bình luận nhiều">tuyển sinh</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                                <li><a href="#" title="Chính trị & chính sách">đào tạo</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                                <li><a href="#" title="Y tế & sức khỏe">kh-cn</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                            </ul>
+                        </li>
+                            
+                        <li><a href="#">văn bản</a> 
+                            <ul class="dropdown">
+                                <li><a href="#" title="Tư liệu">Tư liệu</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                                <li><a href="#" title="Phân tích">Phân tích</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                                <li><a href="#" title="Quân sự">Quân sự</a>
+                                    <ul>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                    </ul></li>
+                            </ul></li>
+                            
+                        <li><a href="#">sinh viên</a>
+                            <ul class="dropdown">
+                                <li><a href="#" title="Thời sự">Thời sự</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Nhịp sống">Nhịp sống</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Food">Food</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                            </ul> </li>
+                            
+                        <li><a href="#">tuyển sinh</a>
+                            <ul >
+                                <li><a href="#" title="Tiền làm gi">Tiền làm gi</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Tài chính cá nhân">Tài chính cá nhân</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Giải mã">Giải mã</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                            </ul></li>
+                            
+                        <li><a href="#">đào tạo</a>
+                            <ul >
+                                <li><a href="#" title="Quốc tế">Quốc tế</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Doanh nghiệp">Doanh nghiệp</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Chứng khoán">Chứng khoán</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                            </ul></li>
+                            
+                        <li><a href="#">Khoa học</a>
+                            <ul >
+                                <li><a href="#" title="Khoa học trong nước">Khoa học trong nước</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Tin tức">Tin tức</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Phát minh">Phát minh</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                            </ul></li>
+                            
+                        <li><a href="#">Giải trí</a>
+                            <ul >
+                                <li><a href="#" title="Video">Video</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Film">Film</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                                <li><a href="#" title="Nhạc">Nhạc</a><ul>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                </ul></li>
+                            </ul></li>
+                            
+                        
+                        <li><a href="#">Thể thao</a>
+                            <ul >
+                                <li><a href="#" title="Bóng đá">Bóng đá</a></li>
+                                <li><a href="#" title="Tennis">Tennis</a></li>
+                                <li><a href="#" title="Lịch thi đấu">Lịch thi đấu</a></li>
+                            </ul></li>
+                            
+                               
+                    </ul>
+                </nav>
+
+                <div>
+                    aihi
+                </div>
+
+            </div>
+
+        </main><!-- MAIN -->
+
+
+
+    </section>
+    <!-- CONTENT -->
+
+
+    <script src="style.js"></script>
+</body>
+
+</html>
+</body>
+
+</html>
